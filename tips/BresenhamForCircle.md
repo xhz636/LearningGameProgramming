@@ -10,5 +10,5 @@
 
 ## 代码实现
 
-C++实现位于 [BresenhamForCircle.cpp][../practice/PracticeInVS2017/BresenhamForCircle/BresenhamForCircle.cpp]
+C++实现位于 [BresenhamForCircle.cpp][https://github.com/xhz636/LearningGameProgramming/blob/master/practice/PracticeInVS2017/BresenhamForCircle/BresenhamForCircle.cpp]
 
