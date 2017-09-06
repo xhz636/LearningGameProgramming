@@ -30,3 +30,32 @@
 2. 在`环境`中添加运行库（dll）所在目录，例如：`PATH=%PATH%;$(ProjectDir)\相对项目文件夹的路径`
 
 
+# 内存泄漏检测
+
+Windows集成了一套内存泄漏检测的库，在Visual Studio中可以直接使用（只在Debug版本中生效）。
+
+## 示例代码
+
+```cpp
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+#ifdef _DEBUG
+#define new new( _CLIENT_BLOCK, __FILE__, __LINE__)
+#endif
+
+int main()
+{
+    int *leak = new int[10];
+    _CrtDumpMemoryLeaks();
+    return 0;
+}
+```
+
+## 逐行解释
+
+* 第1~3行声明了\_CRTDBG\_MAP\_ALLOC的宏定义，然后include crtdbg库，在调试版本中就会启动Windows内置的一套内存分配和泄漏检测的工具。
+* 第5~7行重新声明了new关键字，这样可以在最后dump memory的时候看到泄漏的内存分配的位置。
+* 第12行使用\_CrtDumpMemoryLeaks函数在最后程序退出的时候显示出所有内存的泄漏情况。
+
